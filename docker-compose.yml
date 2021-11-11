@@ -5,7 +5,7 @@ services:
     build:
       context: ./                       # 指定设定上下文根目录，然后以该目录为准指定Dockerfile
       dockerfile: ./Dockerfile
-    container_name: test-server-container
+    container_name: test-server-server-container
     environment:
       TZ: Asia/Shanghai
     ports:
