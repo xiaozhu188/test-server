@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作品预览</title>
+    <link rel="stylesheet" href="/engine_libs/sguoyi.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .component {
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div
+            :style="{
+                ...pageStyles,
+            }"
+        >
+            <div v-for="(item, index) in componentData" :key="index" class="shape">
+                <component class="component" :is="item.component" :style="getStyle(item.style)" v-bind="{...item.propValue}" />
+            </div>
+        </div>
+    </div>
+
+    <script src="/engine_libs/vue.min.js"></script>
+    <script src="/engine_libs/sguoyi.umd.min.js"></script>
+    <script>
+        var _pageData = <%- JSON.stringify(workData) %>
+            console.log(_pageData.content);
+    </script>
+    <script>
+        function getStyle(style, filter = []) {
+            const needUnit = [
+                'fontSize',
+                'width',
+                'height',
+                'top',
+                'left',
+                'borderWidth',
+                'letterSpacing',
+                'borderRadius',
+            ]
+
+            const result = {}
+            Object.keys(style).forEach(key => {
+                if (!filter.includes(key)) {
+                    if (key != 'rotate') {
+                        result[key] = style[key]
+
+                        if (needUnit.includes(key)) {
+                            result[key] += 'px'
+                        }
+                    } else {
+                        result.transform = key + '(' + style[key] + 'deg)'
+                    }
+                }
+            })
+
+            return result
+        }
+        new Vue({
+            el: '#app',
+            data: {
+                componentData: _pageData.content.componentData,
+                canvasStyleData: _pageData.content.canvasStyleData,
+                pageSetting: _pageData.content.pageSetting
+            },
+            computed: {
+                pageStyles() {
+                    return {
+                        backgroundImage:
+                            "url(" + this.pageSetting.backgroundImage + ")",
+                        backgroundSize: this.pageSetting.backgroundSize,
+                        backgroundRepeat: this.pageSetting.backgroundRepeat,
+                        backgroundPosition: this.pageSetting.backgroundPosition,
+                        width: this.canvasStyleData.width + 'px',
+                        height: this.canvasStyleData.height + 'px',
+                        position: 'relative',
+                        margin: 'auto',
+                    };
+                },
+            },
+        })
+    </script>
+</body>
+
+</html>
