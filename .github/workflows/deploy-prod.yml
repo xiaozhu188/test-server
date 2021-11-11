@@ -1,0 +1,27 @@
+name: Build and Deploy
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.1
+
+      - name: Set SSH Key
+        run: |
+              mkdir -p ~/.ssh/
+              echo "${{ secrets.SSH_WORK_WIN_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+              chmod 600 ~/.ssh/id_rsa
+              ssh-keyscan "${{ secrets.IP }}" >> ~/.ssh/known_hosts
+
+      - name: Deploy
+        run: |
+             ssh work@${{ secrets.IP }} "bash -s" < bin/deploy.sh ${{ github.ref }}
+
+      - name: Delete SSH Key
+        run: rm -rf ~/.ssh/id_rsa
+    
