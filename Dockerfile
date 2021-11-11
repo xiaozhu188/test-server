@@ -7,5 +7,6 @@ COPY ./ .
 
 RUN npm config set registry https://registry.npm.taobao.org;
 RUN npm install
+RUN echo npx pm2 -v
 
 CMD npm run prod-dev && npx pm2 log

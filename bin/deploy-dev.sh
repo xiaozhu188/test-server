@@ -17,7 +17,7 @@ echo "==============撤销一切文件改动================="
 git checkout .
 echo "==============拉取最新的主分支代码================="
 git pull origin main
-echo "==============切换tag $1================="
+echo "==============切换到主分支================="
 git checkout main
 
 sleep 1
@@ -25,4 +25,4 @@ sleep 1
 docker-compose build test-server
 docker-compose up -d
 
-echo "==============docker-compose build success================"
+echo "==============docker-compose build end================"
