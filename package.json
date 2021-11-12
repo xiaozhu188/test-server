@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "test-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,7 +7,8 @@
     "start": "node app.js",
     "dev": "cross-env NODE_ENV=dev nodemon app.js",
     "prod-dev": "cross-env NODE_ENV=prod-dev npx pm2 start bin/pm2-prd-dev.config.js",
-    "prod": "cross-env NODE_ENV=prod npx pm2 start bin/pm2-prd.config.js"
+    "prod": "cross-env NODE_ENV=prod npx pm2 start bin/pm2-prd.config.js",
+    "release": "release-it"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +30,7 @@
   "devDependencies": {
     "cross-env": "^7.0.3",
     "nodemon": "^2.0.13",
-    "pm2": "^5.1.2"
+    "pm2": "^5.1.2",
+    "release-it": "^14.11.6"
   }
 }

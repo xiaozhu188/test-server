@@ -3,6 +3,7 @@ on:
   push:
     tags:
       - 'v*.*.*'
+      
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -20,7 +21,7 @@ jobs:
 
       - name: Deploy
         run: |
-             ssh work@${{ secrets.IP }} "bash -s" < bin/deploy.sh ${{ github.ref }}
+             ssh work@${{ secrets.IP }} "bash -s" < bin/deploy-prod.sh ${{ github.ref }}
 
       - name: Delete SSH Key
         run: rm -rf ~/.ssh/id_rsa

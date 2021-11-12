@@ -13,12 +13,10 @@ if [ ! -d "/home/work/app/test-server" ]; then
 fi
 cd "/home/work/app/test-server"
 
-echo "==============撤销一切文件改动================="
-git checkout .
-echo "==============拉取最新的主分支代码================="
-git pull origin main
-echo "==============切换到主分支================="
-git checkout main
+echo "==============切换到dev分支================="
+git checkout dev
+echo "==============拉取最新的dev分支代码================="
+git pull origin dev
 
 sleep 1
 

@@ -1,8 +1,15 @@
-name: Build and Deploy
+name: Deploy For Dev
 on:
   push:
     branches:
-      - "main"
+      - 'dev' # 只针对 dev 分支
+    paths:
+      - '.github/workflows/*'
+      - 'src/**'
+      - 'Dockerfile'
+      - 'docker-compose.yml'
+      - 'bin/*'
+      
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest

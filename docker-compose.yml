@@ -9,4 +9,4 @@ services:
     environment:
       TZ: Asia/Shanghai
     ports:
-      - "3000:3000"                      # 映射端口
+      - "2001:3000"                      # 映射端口
