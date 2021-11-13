@@ -18,9 +18,12 @@ git checkout dev
 echo "==============拉取最新的dev分支代码================="
 git pull origin dev
 
-sleep 1
+docker-compose build --force-rm --no-cache test-server
 
-docker-compose build test-server
 docker-compose up -d
+
+sleep 3
+
+docker image prune -f # 强制移除none:none的image(https://docs.docker.com/config/pruning/)
 
 echo "==============docker-compose build end================"
